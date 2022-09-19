@@ -7,9 +7,10 @@ use pink_extension as pink;
 #[pink::contract(env=PinkEnvironment)]
 mod phat_hello {
     use super::pink;
-    use ink_prelude::{collections::HashMap, format, string::String};
+    use ink_prelude::{format, string::String};
     use pink::{http_get, PinkEnvironment};
     use scale::{Decode, Encode};
+    use serde::Deserialize;
     // you have to use crates with `no_std` support in contract.
     use serde_json_core;
 
@@ -30,6 +31,13 @@ mod phat_hello {
     #[ink(storage)]
     pub struct PhatHello {
         demo_field: bool,
+    }
+
+    #[derive(Deserialize, Encode, Clone, Debug, PartialEq)]
+    pub struct EtherscanResponse<'a> {
+        status: &'a str,
+        message: &'a str,
+        result: &'a str,
     }
 
     impl PhatHello {
@@ -58,13 +66,10 @@ mod phat_hello {
                 return Err(Error::HttpRequestFailed);
             }
 
-            let result: HashMap<&str, &str> = serde_json_core::from_slice(&resp.body)
+            let result: EtherscanResponse = serde_json_core::from_slice(&resp.body)
                 .or(Err(Error::InvalidResponseBody))?
                 .0;
-            let balance = result
-                .get("result")
-                .ok_or_else(|| Error::InvalidResponseBody)?;
-            Ok(String::from(*balance))
+            Ok(String::from(result.result))
         }
     }
 
