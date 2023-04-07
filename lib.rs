@@ -7,7 +7,7 @@ use pink_extension as pink;
 #[pink::contract(env=PinkEnvironment)]
 mod phat_hello {
     use super::pink;
-    use ink_prelude::{format, string::String};
+    use alloc::{format, string::String};
     use pink::{http_get, PinkEnvironment};
     use scale::{Decode, Encode};
     use serde::Deserialize;
@@ -80,8 +80,6 @@ mod phat_hello {
     mod tests {
         /// Imports all the definitions from the outer scope so we can use them here.
         use super::*;
-        /// Imports `ink_lang` so we can use `#[ink::test]`.
-        use ink_lang as ink;
 
         /// We test a simple use case of our contract.
         #[ink::test]
