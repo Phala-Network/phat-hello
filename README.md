@@ -11,7 +11,7 @@ It receives the Ethereum accounts from users and reports the account balance by 
 Setup the environment for Ink! contract compilation, then run
 
 ```bash
-cargo +nightly contract build
+cargo contract build
 ```
 
 ## Test
@@ -19,5 +19,5 @@ cargo +nightly contract build
 To test your contract locally and see its output, run with
 
 ```bash
-cargo +nightly test -- --nocapture
+cargo test -- --nocapture
 ```
