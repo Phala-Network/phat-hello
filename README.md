@@ -8,7 +8,15 @@ It receives the Ethereum accounts from users and reports the account balance by 
 
 ## Build
 
-Setup the environment for Ink! contract compilation, then run
+Setup the environment for Ink! contract compilation following the [official tutorial](https://github.com/paritytech/cargo-contract#installation)
+
+```bash
+# tested on Ubuntu 22.04
+cargo contract --version
+# cargo-contract-contract 3.0.1-unknown-x86_64-unknown-linux-gnu
+```
+
+then run
 
 ```bash
 cargo contract build
